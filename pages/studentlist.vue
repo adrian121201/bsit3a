@@ -25,23 +25,48 @@ export default {
                     text: 'Student Number',
                     align: 'start',
                     sortable: false,
-                    value: 'Student_no',
+                    value: 'attributes.Student_no',
                 },
-                { text: 'First Name', value: 'First_name' },
-                { text: 'Last Name', value: 'Last_name' },
-                { text: 'Middle Initial', value: 'Middle_initial' },
-                { text: 'Course', value: 'Course' },
-                { text: 'Section', value: 'Section' },
-                { text: 'Year', value: 'Year' },
+                { text: 'First Name', value: 'attributes.First_name' },
+                { text: 'Last Name', value: 'attributes.Last_name' },
+                { text: 'Middle Initial', value: 'attributes.Middle_initial' },
+                { text: 'Course', value: 'attributes.Course' },
+                { text: 'Section', value: 'attributes.Section' },
+                { text: 'Year', value: 'attributes.Year' },
                 { text: '', value: "actions" }
             ],
             StudentData: [
-               
+
+
 
             ],
-        }
+        };
     },
-}
+
+    // All function
+
+    methods: {
+
+        getStudentList() {
+
+             this.$axios.get("http://localhost:1337/api/student-lists")
+             .then(response => {
+                console.log("Success");
+                console.log(response.data.data);
+                this.StudentData = response.data.data
+             })
+             .catch(error =>{
+                console.log("Error!");
+             })
+
+        }
+
+    },
+
+
+    mounted() {
+                   
+        this.getStudentList();
+    }
+};
 </script>
-
-
